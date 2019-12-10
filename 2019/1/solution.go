@@ -11,6 +11,20 @@ func calc(mass int) int {
 	return mass/3 - 2
 }
 
+func calcCalc(mass int) int {
+	var sum int
+	for {
+		fuel := calc(mass)
+		if fuel < 0 {
+			break
+		}
+
+		sum += fuel
+		mass = fuel
+	}
+	return sum
+}
+
 func main() {
 	stat, err := os.Stdin.Stat()
 	if err != nil {
@@ -22,7 +36,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	var sum int
+	var (
+		sum1, sum2 int
+	)
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
@@ -31,8 +47,10 @@ func main() {
 			panic(err)
 		}
 
-		sum += calc(mass)
+		sum1 += calc(mass)
+		sum2 += calcCalc(mass)
 	}
 
-	fmt.Println(sum)
+	fmt.Println(sum1)
+	fmt.Println(sum2)
 }
