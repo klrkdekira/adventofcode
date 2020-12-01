@@ -19,11 +19,21 @@ func compute(input []int) []int {
 			q := input[i+2]
 			r := input[i+3]
 
+			if r > len(input) {
+				break
+			}
+
+			fmt.Println(r, len(input))
+
 			input[r] = input[p] + input[q]
 		case 2:
 			p := input[i+1]
 			q := input[i+2]
 			r := input[i+3]
+
+			if r > len(input) {
+				break
+			}
 
 			input[r] = input[p] * input[q]
 		case 99:
@@ -38,11 +48,23 @@ func compute(input []int) []int {
 	return input
 }
 
-func preprocess(input []int) []int {
-	input[1] = 12
-	input[2] = 2
+func preprocess(input []int, noun, verb int) []int {
+	input[1] = noun
+	input[2] = verb
 
 	return input
+}
+
+func part2(input []int) int {
+	for noun := 0; noun < 100; noun++ {
+		for verb := 0; verb < 100; verb++ {
+			if preprocess(compute(input), noun, verb)[0] == 19690720 {
+				return 100*noun + verb
+			}
+		}
+	}
+
+	return 0
 }
 
 func main() {
@@ -73,5 +95,6 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(compute(preprocess(program))[0])
+	fmt.Println(compute(preprocess(program, 1, 12))[0])
+	fmt.Println(part2(program))
 }
