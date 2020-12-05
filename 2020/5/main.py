@@ -48,23 +48,12 @@ def parse(s):
 
     return (y, x, y * 8 + x)
 
-def find_seat(x, y):
-    if x[2] > y[2]:
-        return x
-    return y
-
 if __name__ == '__main__':
     with open('input') as file:
         rows = map(lambda x: x.strip(), file)
-        seats = set(map(parse, rows))
-        seat = reduce(find_seat, seats)
-        seat_id = seat[2]
-        print(seat_id)
+        seats = set(map(lambda x: x[2], map(parse, rows)))
+        seat = max(seats)
+        print(seat)
 
-        seat_ids = list(map(lambda x: x[2], seats))
-        real_seat_id = 0
-        for i in range(seat_id):
-            if i not in seat_ids and i + 1 in seat_ids and i - 2 in seat_ids:
-                real_seat_id = i
-                break
+        real_seat_id = next(filter(lambda i: i not in seats and i + 1 in seats and i - 2 in seats,range(seat)))
         print(real_seat_id)
