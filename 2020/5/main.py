@@ -68,9 +68,3 @@ if __name__ == '__main__':
                 real_seat_id = i
                 break
         print(real_seat_id)
-
-
-
-
-
-
