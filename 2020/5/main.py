@@ -55,5 +55,5 @@ if __name__ == '__main__':
         seat = max(seats)
         print(seat)
 
-        real_seat_id = next(filter(lambda i: i not in seats and i + 1 in seats and i - 2 in seats,range(seat)))
+        real_seat_id = next(filter(lambda i: i not in seats and i + 1 in seats and i - 2 in seats, range(seat)))
         print(real_seat_id)
