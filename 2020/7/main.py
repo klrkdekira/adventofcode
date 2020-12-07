@@ -9,7 +9,7 @@ def parse(item):
     bag, contains = item.split('contain')
     bag = color(bag.split())
     if 'no other' in contains:
-        return (bag, [])
+        return (bag, {})
     return (bag, dict(map(bag_capacity, contains.split(','))))
 
 def lookup(rules, rule, colour):
