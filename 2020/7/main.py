@@ -28,9 +28,7 @@ def traverse(rules, colour):
 
 if __name__ == '__main__':
     with open('input') as file:
-        rows = map(lambda x: x.strip(), file)
-        rules = dict(map(parse, rows))
-
+        rules = dict(map(parse, file))
         shiny_gold = lambda x: lookup(rules, x, 'shiny gold')
         print(len(list(filter(shiny_gold, rules))))
         print(traverse(rules, 'shiny gold'))
