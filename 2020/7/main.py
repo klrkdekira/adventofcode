@@ -7,33 +7,20 @@ def bag_capacity(item):
 
 def parse(item):
     bag, contains = item.split('contain')
-
+    bag = color(bag.split())
     if 'no other' in contains:
         return (bag, [])
-
-    bag = color(bag.split())
     return (bag, dict(map(bag_capacity, contains.split(','))))
 
 def lookup(rules, rule, colour):
-    bags = rules.get(rule)
-    if not bags:
-        return False
-
-    if colour in bags:
-        return True
-
+    bags = rules.get(rule, [])
     for bag in bags:
-        if bag == colour:
-            return True
-        if lookup(rules, bag, colour):
+        if bag == colour or lookup(rules, bag, colour):
             return True
     return False
 
 def traverse(rules, colour):
-    bags = rules.get(colour)
-    if not bags:
-        return 0
-
+    bags = rules.get(colour, [])
     count = 0
     for bag in bags:
         count += bags[bag] + bags[bag] * traverse(rules, bag)
@@ -43,5 +30,7 @@ if __name__ == '__main__':
     with open('input') as file:
         rows = map(lambda x: x.strip(), file)
         rules = dict(map(parse, rows))
-        print(len(list(filter(lambda x: lookup(rules, x, 'shiny gold'), rules))))
+
+        shiny_gold = lambda x: lookup(rules, x, 'shiny gold')
+        print(len(list(filter(shiny_gold, rules))))
         print(traverse(rules, 'shiny gold'))
