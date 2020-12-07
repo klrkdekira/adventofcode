@@ -13,14 +13,14 @@ def parse(item):
     return (bag, dict(map(bag_capacity, contains.split(','))))
 
 def lookup(rules, rule, colour):
-    bags = rules.get(rule, [])
+    bags = rules.get(rule, {})
     for bag in bags:
         if bag == colour or lookup(rules, bag, colour):
             return True
     return False
 
 def traverse(rules, colour):
-    bags = rules.get(colour, [])
+    bags = rules.get(colour, {})
     count = 0
     for bag in bags:
         count += bags[bag] + bags[bag] * traverse(rules, bag)
