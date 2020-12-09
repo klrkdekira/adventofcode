@@ -3,7 +3,6 @@ def find_sum(list, n):
         for (j, q) in enumerate(list):
             if i == j:
                 continue
-
             if p + q == n:
                 return True
     return False
