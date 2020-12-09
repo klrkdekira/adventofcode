@@ -18,19 +18,15 @@ def part1(list, n):
 
 def part2(list, invalid):
     nums = []
-    pair = ()
     for (i, n) in enumerate(list):
-        nums.append(n)
+        nums.append(0)
         p = 0
         while p < len(nums):
-            if p != i:
-                nums[p] += n
-                if nums[p] == invalid:
-                    pair = (p, i)
-                    break
+            nums[p] += n
+            if nums[p] == invalid:
+                z = sorted(list[p:i])
+                return z[0] + z[-1]
             p += 1
-    z = sorted(list[pair[0] : pair[1]])
-    return z[0] + z[-1]
 
 
 if __name__ == "__main__":
