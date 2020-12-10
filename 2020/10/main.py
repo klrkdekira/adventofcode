@@ -8,24 +8,14 @@ def part1(list):
 
 
 def part2(list):
-    d = {}
-    for i, item in enumerate(list):
-        d[item] = []
-        for j in list[i+1:i+4]:
-            if j - item <= 3:
-                d[item].append(j)       
-
-    x = {list[-1]: 1}
-    for i in reversed(list[:-1]):
-        count = 0
-        for j in d[i]:
-            count += x[j]
-        x[i] = count
-    return x[0]
+    d = {0: 1}
+    for i in list[1:]:
+        d[i] = d.get(i - 1, 0) + d.get(i - 2, 0) + d.get(i - 3, 0)
+    return d[max(d.keys())]
 
 
 if __name__ == '__main__':
-    with open('test') as file:
+    with open('input') as file:
         rows = sorted(map(int, file))
         rows = [0] + rows + [rows[-1] + 3]
         print(part1(rows))        
