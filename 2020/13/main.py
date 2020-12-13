@@ -42,10 +42,10 @@ def earliest(timetable):
         if len(buses) == count:
             return t
 
-        found = list(map(lambda bus: bus[0], filter(lambda bus: (t + bus[1]) % bus[0] == 0, buses)))
+        found = list(filter(lambda bus: (t + bus[1]) % bus[0] == 0, buses))
         if len(found) > count:
             i = t
-            di = reduce(lcm, found)
+            di = reduce(lcm, map(lambda bus: bus[0], found))
             count = len(found)
             continue  
         i += di
