@@ -11,13 +11,12 @@ def parse(line, priority=""):
     line = line.replace(")", " )")
     stack, p = [], []
 
-    expressions = line.split()
-    for i in expressions:
+    for i in line.split():
         if i == "(":
             stack.append(i)
             continue
 
-        if i.endswith(")"):
+        if i == ")":
             while len(stack) > 0 and stack[-1] != "(":
                 p.append(stack.pop())
             stack.pop()
@@ -69,7 +68,7 @@ def compute(line, priority=""):
 
 if __name__ == "__main__":
     lines = []
-    with open("input") as file:
+    with open("test") as file:
         lines = [line.strip() for line in file]
 
     print(sum(map(lambda line: compute(line, ""), lines)))
