@@ -6,7 +6,7 @@ operators = [
 ]
 
 
-def parse(line, priority=""):
+def parse(line, precedence=None):
     line = line.replace("(", "( ")
     line = line.replace(")", " )")
     stack, p = [], []
@@ -26,7 +26,7 @@ def parse(line, priority=""):
             if (len(stack) == 0) or (len(stack) > 0 and stack[-1] == "("):
                 stack.append(i)
             else:
-                while len(stack) > 0 and stack[-1] != "(" and i != priority:
+                while len(stack) > 0 and stack[-1] != "(" and i not in precedence:
                     popped = stack.pop()
                     p.append(popped)
                 stack.append(i)
@@ -40,8 +40,8 @@ def parse(line, priority=""):
     return p
 
 
-def compute(line, priority=""):
-    parsed = parse(line, priority)
+def compute(line, precedence=None):
+    parsed = parse(line, precedence)
 
     stack = []
     for p in parsed:
@@ -68,8 +68,8 @@ def compute(line, priority=""):
 
 if __name__ == "__main__":
     lines = []
-    with open("test") as file:
+    with open("input") as file:
         lines = [line.strip() for line in file]
 
-    print(sum(map(lambda line: compute(line, ""), lines)))
-    print(sum(map(lambda line: compute(line, "+"), lines)))
+    print(sum(map(lambda line: compute(line, []), lines)))
+    print(sum(map(lambda line: compute(line, ["+"]), lines)))
