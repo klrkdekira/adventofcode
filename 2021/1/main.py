@@ -18,15 +18,17 @@ def count_increased(deltas):
 
 def group_window(dataset):
     sums = []
-    for i, _ in enumerate(dataset):
+    i = 0
+    while i < len(dataset):
         a = i
         b = i + 1
         c = i + 2
 
-        if not len(dataset) > c:
-            continue
+        if c >= len(dataset):
+            break
 
         sums.append(dataset[a] + dataset[b] + dataset[c])
+        i += 1
     return sums
 
 
