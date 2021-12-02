@@ -12,8 +12,7 @@ with open("input") as input:
 
 horizontal = 0
 depth = 0
-for cmd in cmds:
-    direction, steps = cmd
+for direction, steps in cmds:
     if direction == "forward":
         horizontal += steps
     elif direction == "down":
@@ -27,8 +26,7 @@ print(horizontal * depth)
 horizontal = 0
 depth = 0
 aim = 0
-for cmd in cmds:
-    direction, steps = cmd
+for direction, steps in cmds:
     if direction == "forward":
         horizontal += steps
         depth += aim * steps
