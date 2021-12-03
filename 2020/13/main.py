@@ -22,8 +22,10 @@ def nearest(departure, buses):
     return abs(q - departure) * lowest
 
 def gcd(a, b):
+    print(a, b)
     while b:
         a, b = b, a % b
+        print(a, b)
     return a
 
 def lcm(a, b):
@@ -58,8 +60,8 @@ if __name__ == '__main__':
         departure = int(lines[0].strip())
         timetable = list(map(lambda x: x.strip(), lines[1].split(',')))
 
-    buses = list(map(int, filter(lambda x: x.isdigit(), timetable)))
-    print(nearest(departure, buses))
+    # buses = list(map(int, filter(lambda x: x.isdigit(), timetable)))
+    # print(nearest(departure, buses))
     print(earliest(timetable))
 
     
