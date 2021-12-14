@@ -45,13 +45,8 @@ def insertion(polymer):
 def summarise(polymer):
     summary = defaultdict(int)
     for k, v in polymer.items():
-        if not v:
-            continue
-        a, b = k
-        summary[a] += v / 2
-        summary[b] += v / 2
-    values = sorted(summary.values())
-    return int(values[len(values) - 1] - values[0])
+        summary[k[1]] += v
+    return max(summary.values()) - min(summary.values())
 
 
 for i in range(40):
