@@ -27,7 +27,7 @@ for i, v in enumerate(raw_template):
 def insertion(polymer):
     changes = defaultdict(int)
     for k, v in polymer.items():
-        if v == 0:
+        if not v:
             continue
         if k in rules:
             left = k[0], rules[k]
@@ -35,13 +35,18 @@ def insertion(polymer):
             changes[k] -= v
             changes[left] += v
             changes[right] += v
+
     for k, v in changes.items():
+        if not v:
+            continue
         polymer[k] += v
 
 
 def summarise(polymer):
     summary = defaultdict(int)
     for k, v in polymer.items():
+        if not v:
+            continue
         a, b = k
         summary[a] += v / 2
         summary[b] += v / 2
