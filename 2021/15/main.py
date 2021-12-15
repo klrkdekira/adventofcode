@@ -69,9 +69,7 @@ def expand(grid):
             new_row = ""
             for x in range(5):
                 for col in row:
-                    c = int(col)
-                    for i in range(y + x):
-                        c = (c + 1) % 10 or 1
+                    c = (int(col) + x + y - 1) % 9 + 1
                     new_row += str(c)
             new_grid.append(new_row)
     return new_grid
